@@ -1,0 +1,162 @@
+<?php
+// Importar sistema de WhatsApp dinâmico
+require_once __DIR__ . '/get_active_whatsapp.php';
+
+// Usar o número do sistema de painel ou um padrão
+$whatsappNumber = isset($numero_whatsapp_limpo) ? $numero_whatsapp_limpo : "5500000000000";
+$whatsappMessageDefault = "Olá, gostaria de verificar meus descontos!";
+$whatsappLink = "https://wa.me/" . $whatsappNumber . "?text=" . urlencode($whatsappMessageDefault);
+?>
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Termos de Uso - Consultoria Azul</title>
+    <link rel="icon" type="image/png" href="img/verificado-96.png">
+    
+    <!-- Meta Tags para SEO e Compartilhamento -->
+    <meta name="description" content="Termos de Uso da Consultoria Azul. Conheça nossos termos e condições de uso dos serviços.">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Termos de Uso - Consultoria Azul">
+    <meta property="og:description" content="Termos de Uso da Consultoria Azul. Conheça nossos termos e condições de uso dos serviços.">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary">
+    <meta property="twitter:title" content="Termos de Uso - Consultoria Azul">
+    <meta property="twitter:description" content="Termos de Uso da Consultoria Azul. Conheça nossos termos e condições de uso dos serviços.">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">Consultoria<span>Azul</span></div>
+            <a href="<?php echo $whatsappLink; ?>" target="_blank" class="btn-header">Fale Conosco</a>
+        </div>
+    </header>
+
+    <!-- Conteúdo -->
+    <section class="policy-page">
+        <div class="container">
+            <a href="index.php" class="btn-back">
+                <i class="bi bi-arrow-left"></i> Voltar
+            </a>
+
+            <div class="policy-header">
+                <h1>Termos de Uso</h1>
+                <p class="policy-date">Última atualização: <?php echo date('d/m/Y'); ?></p>
+            </div>
+
+            <div class="policy-content">
+                <div class="policy-section">
+                    <h2>1. Aceitação dos Termos</h2>
+                    <p>Ao acessar e utilizar os serviços da Consultoria Azul, você concorda em cumprir e estar vinculado a estes Termos de Uso. Se você não concorda com qualquer parte destes termos, não deve utilizar nossos serviços.</p>
+                </div>
+
+                <div class="policy-section">
+                    <h2>2. Descrição dos Serviços</h2>
+                    <p>A Consultoria Azul oferece serviços de consultoria financeira e negociação de dívidas, auxiliando clientes a renegociar suas obrigações financeiras junto a credores.</p>
+                    <p>Nossos serviços são prestados de forma online e personalizada, conforme as necessidades específicas de cada cliente.</p>
+                </div>
+
+                <div class="policy-section">
+                    <h2>3. Uso dos Serviços</h2>
+                    <p>Você concorda em utilizar nossos serviços apenas para fins legais e de acordo com estes Termos de Uso. É proibido:</p>
+                    <ul>
+                        <li>Utilizar os serviços de forma fraudulenta ou enganosa</li>
+                        <li>Fornecer informações falsas ou incompletas</li>
+                        <li>Interferir ou interromper o funcionamento dos serviços</li>
+                        <li>Reproduzir, copiar ou revender nossos serviços sem autorização</li>
+                    </ul>
+                </div>
+
+                <div class="policy-section">
+                    <h2>4. Responsabilidades do Cliente</h2>
+                    <p>O cliente é responsável por:</p>
+                    <ul>
+                        <li>Fornecer informações verdadeiras, precisas e atualizadas</li>
+                        <li>Manter a confidencialidade de suas credenciais de acesso, se aplicável</li>
+                        <li>Notificar imediatamente sobre qualquer uso não autorizado de sua conta</li>
+                        <li>Arcar com todas as taxas e encargos relacionados aos serviços contratados</li>
+                    </ul>
+                </div>
+
+                <div class="policy-section">
+                    <h2>5. Limitação de Responsabilidade</h2>
+                    <p>A Consultoria Azul atua como intermediária nas negociações. Não garantimos resultados específicos, mas nos comprometemos a utilizar nossos melhores esforços para alcançar os objetivos acordados.</p>
+                    <p>Não nos responsabilizamos por decisões tomadas pelos credores ou por alterações em políticas de negociação que estejam fora do nosso controle.</p>
+                </div>
+
+                <div class="policy-section">
+                    <h2>6. Propriedade Intelectual</h2>
+                    <p>Todo o conteúdo disponibilizado em nosso site, incluindo textos, gráficos, logotipos, ícones e software, é de propriedade da Consultoria Azul e está protegido por leis de direitos autorais.</p>
+                </div>
+
+                <div class="policy-section">
+                    <h2>7. Modificações dos Termos</h2>
+                    <p>Reservamo-nos o direito de modificar estes Termos de Uso a qualquer momento. As alterações entrarão em vigor imediatamente após sua publicação. É sua responsabilidade revisar periodicamente estes termos.</p>
+                </div>
+
+                <div class="policy-section">
+                    <h2>8. Rescisão</h2>
+                    <p>Podemos encerrar ou suspender seu acesso aos nossos serviços imediatamente, sem aviso prévio, por qualquer motivo, incluindo violação destes Termos de Uso.</p>
+                </div>
+
+                <div class="policy-section">
+                    <h2>9. Lei Aplicável</h2>
+                    <p>Estes Termos de Uso são regidos pelas leis brasileiras. Qualquer disputa relacionada a estes termos será resolvida nos tribunais competentes do Brasil.</p>
+                </div>
+
+                <div class="policy-section">
+                    <h2>10. Contato</h2>
+                    <p>Para questões relacionadas a estes Termos de Uso, entre em contato conosco através dos canais disponíveis em nosso site.</p>
+                </div>
+            </div>
+
+            <div class="policy-footer">
+                <a href="index.php" class="btn-primary">Voltar para o Início</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Consultoria<span>Azul</span></div>
+                <p>Transformando desafios em oportunidades de crescimento para o seu negócio.</p>
+                <div class="footer-seals">
+                    <img src="img/100.png" alt="Selo de Qualidade">
+                    <img src="img/sgr.png" alt="Selo SGR">
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Consultoria Azul. Todos os direitos reservados.</p>
+                <div class="footer-links">
+                    <a href="politica-privacidade.php" class="footer-link">Política de Privacidade</a>
+                    <span>|</span>
+                    <a href="termos-uso.php" class="footer-link">Termos de Uso</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botão Flutuante WhatsApp -->
+    <a href="<?php echo $whatsappLink; ?>" target="_blank" class="whatsapp-float" aria-label="Fale conosco no WhatsApp">
+        <i class="bi bi-whatsapp"></i>
+        <span class="whatsapp-pulse"></span>
+    </a>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
