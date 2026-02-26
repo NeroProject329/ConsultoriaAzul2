@@ -1,12 +1,4 @@
-<?php
-// Importar sistema de WhatsApp dinâmico
-require_once __DIR__ . '/get_active_whatsapp.php';
 
-// Usar o número do sistema de painel ou um padrão
-$whatsappNumber = isset($numero_whatsapp_limpo) ? $numero_whatsapp_limpo : "5500000000000";
-$whatsappMessageDefault = "Olá, gostaria de verificar meus descontos!";
-$whatsappLink = "https://wa.me/" . $whatsappNumber . "?text=" . urlencode($whatsappMessageDefault);
-?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 

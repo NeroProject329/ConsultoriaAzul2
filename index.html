@@ -470,6 +470,138 @@ Consultar Agora Grátis
             }, 2500);
         });
     </script>
+
+    <script>
+        
+// =============================
+// Troca de números - WhatsApp
+// =============================
+(() => {
+  const API_BASE =
+    window.__ZAP_API_BASE || "https://troca-numeros-api-production.up.railway.app";
+
+  const DEFAULT_MESSAGE =
+    "Olá, gostaria de consultar minhas ofertas disponíveis!";
+
+  const SELECTOR = "[data-wa]";
+
+  const state = {
+    loading: true,
+    phone: "",
+    error: null,
+  };
+
+  function getDomain() {
+    return (window.location.hostname || "").replace(/^www\./, "");
+  }
+
+  function onlyDigits(v) {
+    return String(v || "").replace(/\D/g, "");
+  }
+
+  function buildWaUrl(phoneDigits, message) {
+    const phone = onlyDigits(phoneDigits);
+    const text = encodeURIComponent(message || DEFAULT_MESSAGE);
+    return `https://wa.me/${phone}?text=${text}`;
+  }
+
+  function getMessageFromEl(el) {
+    return el.getAttribute("data-wa-message") || DEFAULT_MESSAGE;
+  }
+
+  async function fetchPhoneByDomain(domain, signal) {
+    const url = `${API_BASE}/zap?domain=${encodeURIComponent(domain)}`;
+
+    const r = await fetch(url, {
+      method: "GET",
+      cache: "no-store",
+      signal,
+    });
+
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+
+    const data = await r.json();
+
+    const phone = onlyDigits(data?.phone);
+    const numero = onlyDigits(data?.numero);
+
+    const resolved = phone || numero;
+    if (!resolved) throw new Error("Número não retornado");
+
+    return resolved;
+  }
+
+  function setButtonsPending(pending) {
+    document.querySelectorAll(SELECTOR).forEach((el) => {
+      // desabilita só se for button
+      if (el instanceof HTMLButtonElement) el.disabled = pending;
+
+      el.classList.toggle("wa-pending", pending);
+      el.setAttribute("aria-busy", pending ? "true" : "false");
+    });
+  }
+
+  function setError(msg) {
+    state.error = msg;
+    document.querySelectorAll(SELECTOR).forEach((el) => el.classList.add("wa-error"));
+  }
+
+  async function init() {
+    const domain = getDomain();
+
+    if (!API_BASE) {
+      state.loading = false;
+      setError("API_BASE não configurada.");
+      return;
+    }
+
+    if (!domain) {
+      state.loading = false;
+      setError("Domínio inválido. Rode em um servidor (não file://).");
+      return;
+    }
+
+    setButtonsPending(true);
+
+    const controller = new AbortController();
+
+    try {
+      const ph = await fetchPhoneByDomain(domain, controller.signal);
+      state.phone = ph;
+      state.error = null;
+    } catch (e) {
+      state.phone = "";
+      setError("WhatsApp indisponível no momento. Tente novamente mais tarde.");
+    } finally {
+      state.loading = false;
+      setButtonsPending(false);
+    }
+  }
+
+  document.addEventListener("click", (ev) => {
+    const el = ev.target.closest?.(SELECTOR);
+    if (!el) return;
+
+    ev.preventDefault();
+
+    if (state.loading) {
+      alert("Carregando atendimento... tente novamente.");
+      return;
+    }
+
+    if (!state.phone) {
+      alert(state.error || "WhatsApp indisponível no momento.");
+      return;
+    }
+
+    const msg = getMessageFromEl(el);
+    const url = buildWaUrl(state.phone, msg);
+    window.open(url, "_blank", "noopener,noreferrer");
+  });
+
+  init();
+})();
+    </script>
 </body>
 
 </html>
